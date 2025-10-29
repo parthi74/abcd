@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+/* Animation Container Styles */
+.animation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    margin: 60px 0;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.company-intro {
+    flex: 1;
+    max-width: 650px;
+    padding: 0 20px;
+    color: #caf0f8;
+    font-size: 1.25rem;  /* Increased from 1.1rem */
+    line-height: 1.8;    /* Increased spacing between lines */
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.lottie-animation {
+    flex: 1;
+    max-width: 400px;
+}
+
+.lottie-animation dotlottie-wc {
+    width: 400px;
+    height: 400px;
+}
+
+/* Card Container - Increased spacing */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;  /* Increased from 20px */
+    flex-wrap: wrap;
+    margin-top: 80px;  /* Increased from 40px */
+    padding: 0 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 260px;
+    text-align: center;
+    padding: 18px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardFadeIn 0.8s ease-out forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+.card:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes cardFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card h3 {
+    color: #fff;
+    margin: 15px 0 10px;
+    font-size: 1.35rem;
+}
+
+.card p {
+    color: #ddd;
+    font-size: 0.98rem;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .animation-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        margin: 40px 0;
+    }
+    
+    .company-intro {
+        max-width: 100%;
+        text-align: center;
+        font-size: 1.15rem;
+        line-height: 1.7;
+    }
+    
+    .lottie-animation {
+        max-width: 100%;
+    }
+    
+    .card {
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .card-container {
+        gap: 30px;
+        margin-top: 60px;
+    }
+}
+
+/* Connect Us Button Styles */
+.connect-btn {
+    background: #4a0d8a;
+    border: 2px solid #caf0f8;
+    color: #caf0f8;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    display: inline-block;
+    animation: fadeInUp 1s ease 0.2s both;
+}
+
+.connect-btn:hover {
+    background: #caf0f8;
+    color: #4a0d8a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="hero-section">
+    <h1>Empower Your Business Growth</h1>
+    <p>Identify your company’s potential and discover solutions that drive success.</p>
+    
+    <!-- Animation and Paragraph Side by Side -->
+    <div class="animation-container">
+        <div class="company-intro">
+            <p>At <strong>amconnect</strong>, we partner with visionary entrepreneurs and established enterprises to unlock exponential growth. Our proven frameworks, powered by AI-driven insights and decades of industry expertise, help you overcome operational bottlenecks, scale revenue streams, and dominate your market. From seed-stage startups to high-margin corporations, we deliver tailored strategies that turn challenges into competitive advantages. Join over 5,000+ businesses that have accelerated their journey to sustainable profitability with us.</p>
+            <button class="connect-btn" onclick="document.getElementById('loginModal').style.display='flex';">Let's Connect</button>
+        </div>
+        <div class="lottie-animation">
+            <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
+            <dotlottie-wc src="https://lottie.host/05bd22f2-b2e1-48a9-ba8c-55bd22fb3b7d/CoEzZQqh9R.lottie" style="width: 400px; height: 400px" autoplay loop></dotlottie-wc>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card" data-category="startup">
+            <img src="https://cdn.prod.website-files.com/62a516e4c9aebb69f972c23c/637b84920376a8118ea7cf29_Startup%20image.jpeg" alt="Startup" />
+            <h3>Startup</h3>
+            <p>For new businesses aiming to find market fit and funding guidance.</p>
+        </div>
+        <div class="card" data-category="loss">
+            <img src="https://img.freepik.com/premium-vector/financial-loss-business-bankrupt-illustration_677179-36.jpg" alt="Loss" />
+            <h3>Loss Company</h3>
+            <p>Recover your business from setbacks and uncover new growth strategies.</p>
+        </div>
+        <div class="card" data-category="low">
+            <img src="https://img.freepik.com/premium-vector/job-promotion-concept-illustration_114360-23155.jpg" alt="Low Profit" />
+            <h3>Low Profit Company (&lt;10%)</h3>
+            <p>Optimize your operations and scale up your profit margins.</p>
+        </div>
+        <div class="card" data-category="profit">
+            <img src="https://i.pinimg.com/736x/18/da/f1/18daf15a6c6894b57138b8f41d6fe5bd.jpg" alt="Profit" />
+            <h3>Profit Company (&gt;10%)</h3>
+            <p>Maximize your growth and discover advanced strategies to scale further.</p>
+        </div>
+    </div>
+</main>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" id="closeLogin">x</span>
+        <h2>Enter Company Details</h2>
+        <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+            <input type="text" name="companyName" placeholder="Company Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+
+            <!-- Hidden input to pass selected category -->
+            <input type="hidden" name="category" id="selectedCategoryInput" value="">
+
+            <div class="login-buttons">
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn skip-btn" id="skipLogin">Skip to Survey</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        const modal = document.getElementById('loginModal');
+        const categoryInput = document.getElementById('selectedCategoryInput');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category;
+                fetch(`/select_category/${category}`)
+                    .then(() => {
+                        categoryInput.value = category;
+                        modal.style.display = 'flex';
+                    });
+            });
+        });
+
+        document.getElementById('skipLogin').addEventListener('click', () => {
+            window.location.href = '/skip_login';
+        });
+
+        document.getElementById('closeLogin').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.id === 'loginModal') modal.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}

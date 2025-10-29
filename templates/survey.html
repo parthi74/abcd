@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Survey - amconnect{% endblock %}
+
+{% block content %}
+<main class="survey-container">
+    <h2>Business Evaluation Survey - {{ category.title() }}</h2>
+    <form id="surveyForm" method="POST" action="{{ url_for('submit_survey') }}">
+        {% for idx, question in questions|enumerate(start=1) %}
+        <div class="question">
+            <p>{{ idx }}. {{ question }}</p>
+            {% if idx <= 5 %}
+                <label><input type="radio" name="q{{ idx }}" value="Yes" required> Yes</label>
+                <label><input type="radio" name="q{{ idx }}" value="No"> No</label>
+            {% else %}
+                <label><input type="radio" name="q{{ idx }}" value="Strongly Agree" required> Strongly Agree</label>
+                <label><input type="radio" name="q{{ idx }}" value="Agree"> Agree</label>
+                <label><input type="radio" name="q{{ idx }}" value="Intermediate"> Intermediate</label>
+                <label><input type="radio" name="q{{ idx }}" value="Disagree"> Disagree</label>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn submit-btn">Submit Survey</button>
+    </form>
+</main>
+{% endblock %}

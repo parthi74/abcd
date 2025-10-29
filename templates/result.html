@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Survey Results - amconnect{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<main class="result-container">
+    <div class="result-card">
+        <h2>Your Business Evaluation Result</h2>
+        <canvas id="resultChart" width="280" height="280"></canvas>
+
+        <div class="score-box">
+            <h3>Your Score: {{ score }}%</h3>
+            <p>{{ message }}</p>
+        </div>
+
+        <div class="result-actions">
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+            {% if score < 75 %}
+            <a href="/contact" class="btn contact-btn" id="contactBtn">Contact Us</a>
+            {% endif %}
+        </div>
+
+       
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('resultChart').getContext('2d');
+        const score = {{ score | tojson }};
+        const circleColor = {{ circle_color | tojson }};
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Score', 'Remaining'],
+                datasets: [{ data: [score, 100 - score], backgroundColor: [circleColor, '#e5e7eb'], borderWidth: 0 }]
+            },
+            options: {
+                cutout: '70%',
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        const contactBtn = document.getElementById('contactBtn');
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if (contactBtn) {
+            contactBtn.addEventListener('click', () => {
+                contactForm.style.display = 'flex';
+            });
+        }
+
+        contactForm.addEventListener('submit', function(e) {
+            formMessage.textContent = 'Sending...';
+            formMessage.style.color = '#00b4d8';
+        });
+    });
+</script>
+{% endblock %}

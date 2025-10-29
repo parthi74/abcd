@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us | amconnect{% endblock %}
+
+{% block head %}
+<style>
+/* [All your existing CSS from previous version - unchanged] */
+.contact-hero { text-align: center; padding: 100px 20px 80px; background: transparent; color: #caf0f8; position: relative; overflow: visible; margin-bottom: 40px; width: 100%; box-sizing: border-box; }
+.contact-hero h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); margin-bottom: 15px; opacity: 0; transform: translateY(30px); animation: fadeInUp 1s ease-out 0.3s forwards; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.2); font-weight: 700; }
+.contact-hero h1 span { color: #caf0f8; font-weight: 700; }
+.contact-hero p { font-size: clamp(1rem, 3vw, 1.3rem); max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(20px); animation: fadeInUp 1s ease-out 0.6s forwards; color: #caf0f8; line-height: 1.6; }
+.contact-hero::after { content: ''; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: clamp(80px, 20vw, 200px); height: 4px; background: #caf0f8; border-radius: 2px; opacity: 0; animation: expandLine 1s ease-out 0.9s forwards; }
+
+.contact-container { display: flex; align-items: stretch; justify-content: center; gap: clamp(30px, 5vw, 60px); max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; flex-wrap: wrap; width: 100%; box-sizing: border-box; }
+
+.contact-form { flex: 1; min-width: 300px; max-width: 600px; background: rgba(42, 13, 92, 0.7); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(202,240,248,0.2); opacity: 0; transform: translateX(-50px); animation: fadeInLeft 1.2s ease-out 1s forwards; }
+.contact-form h2 { color: #caf0f8; font-size: clamp(1.6rem, 4vw, 1.9rem); margin-bottom: 25px; text-align: center; font-weight: 600; }
+.contact-form .form-group { margin-bottom: 20px; }
+.contact-form label { display: block; color: #caf0f8; font-size: 1rem; margin-bottom: 8px; font-weight: 500; }
+.contact-form input, .contact-form textarea { width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.1); border: 2px solid rgba(202,240,248,0.3); border-radius: 12px; color: #fff; font-size: 1rem; transition: all 0.3s ease; box-sizing: border-box; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(202,240,248,0.7); }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #caf0f8; background: rgba(255,255,255,0.15); box-shadow: 0 0 15px rgba(202,240,248,0.3); }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form button { background: #4a0d8a; color: #caf0f8; border: 2px solid #caf0f8; padding: 14px 30px; font-size: 1.1rem; font-weight: 600; border-radius: 30px; cursor: pointer; width: 100%; transition: all 0.4s ease; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.contact-form button:hover { background: #caf0f8; color: #4a0d8a; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+
+.contact-info { flex: 1; min-width: 300px; max-width: 500px; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateX(50px); animation: fadeInRight 1.2s ease-out 1.2s forwards; }
+.contact-info h2 { color: #caf0f8; font-size: clamp(1.6rem, 4vw, 1.9rem); margin-bottom: 30px; font-weight: 600; }
+.info-item { display: flex; align-items: flex-start; margin-bottom: 25px; color: #caf0f8; }
+.info-icon { width: 50px; height: 50px; background: rgba(202,240,248,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0; font-size: 1.3rem; color: #caf0f8; border: 2px solid rgba(202,240,248,0.4); transition: all 0.3s ease; }
+.info-item:hover .info-icon { background: #caf0f8; color: #4a0d8a; transform: scale(1.1); }
+.info-content h3 { color: #caf0f8; font-size: 1.2rem; margin: 0 0 8px; font-weight: 600; }
+.info-content p { color: #caf0f8; font-size: 1rem; margin: 0; line-height: 1.6; opacity: 0.9; }
+
+
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { to { opacity: 1; transform: translateX(0); } }
+@keyframes expandLine { to { width: clamp(80px, 20vw, 200px); opacity: 1; } }
+
+@media (max-width: 768px) {
+    .contact-hero { padding: 80px 15px 60px; }
+    .contact-container { flex-direction: column; gap: 40px; margin: 0 auto 60px; padding: 0 15px; }
+    .contact-form, .contact-info { max-width: 100%; }
+    .contact-form { padding: 30px; }
+    .contact-form button { padding: 12px 25px; font-size: 1rem; }
+    .contact-hero::after { bottom: 20px; }
+}
+@media (max-width: 480px) {
+    .contact-hero { padding: 70px 10px 50px; }
+    .contact-container { padding: 0 10px; gap: 30px; }
+    .contact-form { padding: 25px; }
+    .info-item { margin-bottom: 20px; }
+    .info-icon { width: 45px; height: 45px; font-size: 1.1rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <h1>Get in <span>Touch</span></h1>
+    <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+</section>
+
+<div class="contact-container">
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Send us a Message</h2>
+        <form action="{{ url_for('contact_page') }}" method="POST">
+            <div class="form-group">
+                <label for="company_name">Company Name *</label>
+                <input type="text" id="company_name" name="company_name" placeholder="Enter your Company Name" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" placeholder="Enter your Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your Phone Number" pattern="\+?[0-9]{10,15}" required>
+                <small style="color: #caf0f8; opacity: 0.8;">Include country code (e.g. +91)</small>
+            </div>
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" placeholder="Tell us how we can help your business grow..." required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        <div class="info-item">
+            <div class="info-icon">Location</div>
+            <div class="info-content">
+                <h3>Our Office</h3>
+                <p>123 Business Tower<br>Tech Park, Mumbai<br>Maharashtra 400001, India</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">Phone</div>
+            <div class="info-content">
+                <h3>Call Us</h3>
+                <p>+91 98765 43210<br>+91 91234 56789</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-icon">Envelope</div>
+            <div class="info-content">
+                <h3>Email Us</h3>
+                <p>hello@amconnect.in<br>support@amconnect.in</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

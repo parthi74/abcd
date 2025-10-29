@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | amconnect{% endblock %}
+
+{% block head %}
+<style>
+/* Hero Section - Clean, Responsive, No Overflow */
+.about-hero {
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: transparent;
+    color: #caf0f8;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.about-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+.about-hero h1 span {
+    color: #caf0f8;
+    font-weight: 700;
+}
+
+.about-hero p {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+    color: #caf0f8;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+/* Decorative Line */
+.about-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(80px, 20vw, 200px);
+    height: 4px;
+    background: #caf0f8;
+    border-radius: 2px;
+    opacity: 0;
+    animation: expandLine 1s ease-out 0.9s forwards;
+}
+
+/* Content Section - Fully Responsive */
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(30px, 5vw, 60px);
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: fadeInLeft 1.2s ease-out 0.9s forwards;
+}
+
+.about-text h2 {
+    color: #caf0f8;
+    font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+    margin: 35px 0 18px;
+    position: relative;
+    padding-left: 28px;
+    font-weight: 600;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.about-text h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 34px;
+    background: #caf0f8;
+    border-radius: 5px;
+    opacity: 0;
+    animation: slideIn 0.6s ease-out forwards;
+    animation-delay: inherit;
+}
+
+.about-text p {
+    color: #caf0f8;
+    font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.8s ease-out forwards;
+    word-wrap: break-word;
+    padding: 0 5px;
+}
+
+/* Staggered Animations */
+.about-text h2:nth-of-type(1), 
+.about-text h2:nth-of-type(1)::before, 
+.about-text p:nth-of-type(1) { animation-delay: 1.2s, 1.2s, 1.4s; }
+
+.about-text h2:nth-of-type(2), 
+.about-text h2:nth-of-type(2)::before, 
+.about-text p:nth-of-type(2) { animation-delay: 1.6s, 1.6s, 1.8s; }
+
+.about-text h2:nth-of-type(3), 
+.about-text h2:nth-of-type(3)::before, 
+.about-text p:nth-of-type(3) { animation-delay: 2.0s, 2.0s, 2.2s; }
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    opacity: 0;
+    transform: translateX(50px);
+    animation: fadeInRight 1.2s ease-out 1.2s forwards;
+    text-align: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    animation: floatImage 4s ease-in-out infinite;
+    border: 3px solid #caf0f8;
+}
+
+.about-image img:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    border-color: #ffffff;
+}
+
+/* Animations */
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { to { opacity: 1; transform: translateX(0); } }
+@keyframes slideIn { to { opacity: 1; } }
+@keyframes floatImage { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes expandLine { to { width: clamp(80px, 20vw, 200px); opacity: 1; } }
+
+/* Responsive - Mobile First */
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 80px 15px 60px;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        margin: 0 auto 60px;
+        padding: 0 15px;
+    }
+    
+    .about-text h2 {
+        padding-left: 0;
+        text-align: center;
+        margin: 30px 0 15px;
+        font-size: clamp(1.4rem, 5vw, 1.7rem);
+    }
+    
+    .about-text h2::before {
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 8px;
+        height: 28px;
+    }
+    
+    .about-text p {
+        font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+        margin-bottom: 25px;
+        padding: 0;
+    }
+    
+    .about-hero::after {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        padding: 70px 10px 50px;
+    }
+    
+    .about-content {
+        gap: 30px;
+        padding: 0 10px;
+    }
+    
+    .about-text, .about-image {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .about-text h2 {
+        margin: 25px 0 12px;
+        padding: 0 10px;
+    }
+    
+    .about-text p {
+        padding: 0 10px;
+        margin-bottom: 20px;
+    }
+    
+    .about-image img {
+        border-radius: 15px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <h1>About <span>Business Growth</span></h1>
+    <p>Helping businesses accelerate growth, maximize profit, and sustain success.</p>
+</section>
+
+<section class="about-content">
+    <div class="about-text">
+        <h2>Who We Are</h2>
+        <p>We are a team of business strategists, analysts, and growth experts dedicated to helping startups, low-profit, and profit-stage companies achieve long-term success. Our mission is to empower organizations with data-driven insights and innovative solutions that fuel sustainable business growth.</p>
+        
+        <h2>What We Do</h2>
+        <p>From market analysis to profitability optimization, we provide comprehensive strategies to transform challenges into opportunities. Our services are designed to identify gaps, streamline processes, and unlock your company’s true potential.</p>
+        
+        <h2>Our Mission</h2>
+        <p>To guide businesses in achieving measurable growth by aligning strategy, innovation, and execution. We believe every business—regardless of its size or profit margin—can thrive with the right support and vision.</p>
+    </div>
+    <div class="about-image">
+        <img src="https://cdn.gobankingrates.com/wp-content/uploads/2018/03/6-investment-iStock-881541068.jpg?w=675&quality=75&webp=1" alt="Business Team" />
+    </div>
+</section>
+{% endblock %}

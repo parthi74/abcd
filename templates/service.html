@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services | amconnect{% endblock %}
+
+{% block head %}
+<style>
+/* Hero Section - Services */
+.services-hero {
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: transparent;
+    color: #caf0f8;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.services-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+.services-hero h1 span {
+    color: #caf0f8;
+    font-weight: 700;
+}
+
+.services-hero p {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+    color: #caf0f8;
+    line-height: 1.6;
+}
+
+/* Decorative Line */
+.services-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(80px, 20vw, 200px);
+    height: 4px;
+    background: #caf0f8;
+    border-radius: 2px;
+    opacity: 0;
+    animation: expandLine 1s ease-out 0.9s forwards;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(25px, 4vw, 40px);
+    max-width: 1200px;
+    margin: 0 auto 100px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.service-card {
+    background: rgba(42, 13, 92, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(202, 240, 248, 0.2);
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUpCard 0.8s ease-out forwards;
+}
+
+.service-card:nth-child(1) { animation-delay: 0.2s; }
+.service-card:nth-child(2) { animation-delay: 0.4s; }
+.service-card:nth-child(3) { animation-delay: 0.6s; }
+.service-card:nth-child(4) { animation-delay: 0.8s; }
+
+.service-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    background: rgba(42, 13, 92, 0.85);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border-color: #caf0f8;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(202, 240, 248, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2.2rem;
+    color: #caf0f8;
+    border: 3px solid rgba(202, 240, 248, 0.4);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+    background: #caf0f8;
+    color: #4a0d8a;
+    transform: scale(1.1);
+    border-color: #ffffff;
+}
+
+.service-card h3 {
+    color: #caf0f8;
+    font-size: clamp(1.4rem, 3.5vw, 1.7rem);
+    margin: 0 0 15px;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: #caf0f8;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* CTA Section */
+.services-cta {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(42, 13, 92, 0.6);
+    border-radius: 20px;
+    max-width: 1000px;
+    margin: 0 auto 80px;
+    backdrop-filter: blur(8px);
+    border: 1px dashed rgba(202, 240, 248, 0.3);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out 1.2s forwards;
+}
+
+.services-cta h2 {
+    color: #caf0f8;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.services-cta p {
+    color: #caf0f8;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.cta-btn {
+    background: #4a0d8a;
+    color: #caf0f8;
+    border: 2px solid #caf0f8;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-btn:hover {
+    background: #caf0f8;
+    color: #4a0d8a;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUpCard { to { opacity: 1; transform: translateY(0); } }
+@keyframes expandLine { to { width: clamp(80px, 20vw, 200px); opacity: 1; } }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 80px 15px 60px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin: 0 auto 60px;
+        padding: 0 15px;
+    }
+    
+    .service-card {
+        padding: 30px 20px;
+    }
+    
+    .services-cta {
+        padding: 60px 20px;
+        margin: 0 auto 60px;
+    }
+    
+    .services-hero::after {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-hero {
+        padding: 70px 10px 50px;
+    }
+    
+    .services-grid {
+        padding: 0 10px;
+        gap: 25px;
+    }
+    
+    .service-card {
+        padding: 25px 15px;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.9rem;
+    }
+    
+    .services-cta {
+        padding: 50px 15px;
+    }
+    
+    .cta-btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="services-hero">
+    <h1>Our <span>Services</span></h1>
+    <p>End-to-end business growth solutions tailored for startups, loss-making, low-profit, and high-growth companies.</p>
+</section>
+
+<div class="services-grid">
+    <!-- Service 1 -->
+    <div class="service-card">
+        <div class="service-icon">Chart-Line</div>
+        <h3>Market Analysis & Strategy</h3>
+        <p>Deep dive into your industry, competitors, and customer behavior to build data-backed growth roadmaps that dominate your niche.</p>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card">
+        <div class="service-icon">Wrench</div>
+        <h3>Operational Optimization</h3>
+        <p>Streamline processes, reduce waste, and boost efficiency with AI-powered tools and lean methodologies for maximum profitability.</p>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card">
+        <div class="service-icon">Dollar</div>
+        <h3>Financial Restructuring</h3>
+        <p>Turn losses into profits. We analyze cash flow, cut costs, renegotiate debts, and unlock hidden revenue streams.</p>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card">
+        <div class="service-icon">Rocket</div>
+        <h3>Scale & Expansion</h3>
+        <p>From local to global. We help high-profit companies scale sustainably with new markets, partnerships, and innovation.</p>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="services-cta">
+    <h2>Ready to Transform Your Business?</h2>
+    <p>Take our free 2-minute assessment and get a personalized growth report with actionable insights.</p>
+    <a href="{{ url_for('survey') }}" class="cta-btn">Start Free Assessment</a>
+</div>
+{% endblock %}
